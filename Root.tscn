@@ -1,0 +1,472 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://images/squareW.png" type="Texture" id=1]
+[ext_resource path="res://images/squareB.png" type="Texture" id=2]
+[ext_resource path="res://images/queenW2.png" type="Texture" id=3]
+[ext_resource path="res://images/queenB2.png" type="Texture" id=4]
+
+[node name="Root" type="Node2D" index="0"]
+
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="A1" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="B1" type="Sprite" parent="." index="1"]
+
+position = Vector2( 52, 0 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="C1" type="Sprite" parent="." index="2"]
+
+position = Vector2( 104, 0 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="D1" type="Sprite" parent="." index="3"]
+
+position = Vector2( 156, 0 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="E1" type="Sprite" parent="." index="4"]
+
+position = Vector2( 208, 0 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="F1" type="Sprite" parent="." index="5"]
+
+position = Vector2( 260, 0 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="G1" type="Sprite" parent="." index="6"]
+
+position = Vector2( 312, 0 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="H1" type="Sprite" parent="." index="7"]
+
+position = Vector2( 364, 0 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="A2" type="Sprite" parent="." index="8"]
+
+position = Vector2( 0, 52 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="B2" type="Sprite" parent="." index="9"]
+
+position = Vector2( 52, 52 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="C2" type="Sprite" parent="." index="10"]
+
+position = Vector2( 104, 52 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="D2" type="Sprite" parent="." index="11"]
+
+position = Vector2( 156, 52 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="E2" type="Sprite" parent="." index="12"]
+
+position = Vector2( 208, 52 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="F2" type="Sprite" parent="." index="13"]
+
+position = Vector2( 260, 52 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="G2" type="Sprite" parent="." index="14"]
+
+position = Vector2( 312, 52 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="H2" type="Sprite" parent="." index="15"]
+
+position = Vector2( 364, 52 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="A3" type="Sprite" parent="." index="16"]
+
+position = Vector2( 0, 104 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="B3" type="Sprite" parent="." index="17"]
+
+position = Vector2( 52, 104 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="C3" type="Sprite" parent="." index="18"]
+
+position = Vector2( 104, 104 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="D3" type="Sprite" parent="." index="19"]
+
+position = Vector2( 156, 104 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="E3" type="Sprite" parent="." index="20"]
+
+position = Vector2( 208, 104 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="F3" type="Sprite" parent="." index="21"]
+
+position = Vector2( 260, 104 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="G3" type="Sprite" parent="." index="22"]
+
+position = Vector2( 312, 104 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="H3" type="Sprite" parent="." index="23"]
+
+position = Vector2( 364, 104 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="A4" type="Sprite" parent="." index="24"]
+
+position = Vector2( 0, 156 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="B4" type="Sprite" parent="." index="25"]
+
+position = Vector2( 52, 156 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="C4" type="Sprite" parent="." index="26"]
+
+position = Vector2( 104, 156 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="D4" type="Sprite" parent="." index="27"]
+
+position = Vector2( 156, 156 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="E4" type="Sprite" parent="." index="28"]
+
+position = Vector2( 208, 156 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="F4" type="Sprite" parent="." index="29"]
+
+position = Vector2( 260, 156 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="G4" type="Sprite" parent="." index="30"]
+
+position = Vector2( 312, 156 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="H4" type="Sprite" parent="." index="31"]
+
+position = Vector2( 364, 156 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="A5" type="Sprite" parent="." index="32"]
+
+position = Vector2( 0, 208 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="B5" type="Sprite" parent="." index="33"]
+
+position = Vector2( 52, 208 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="C5" type="Sprite" parent="." index="34"]
+
+position = Vector2( 104, 208 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="D5" type="Sprite" parent="." index="35"]
+
+position = Vector2( 156, 208 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="E5" type="Sprite" parent="." index="36"]
+
+position = Vector2( 208, 208 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="F5" type="Sprite" parent="." index="37"]
+
+position = Vector2( 260, 208 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="G5" type="Sprite" parent="." index="38"]
+
+position = Vector2( 312, 208 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="H5" type="Sprite" parent="." index="39"]
+
+position = Vector2( 364, 208 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="A6" type="Sprite" parent="." index="40"]
+
+position = Vector2( 0, 260 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="B6" type="Sprite" parent="." index="41"]
+
+position = Vector2( 52, 260 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="C6" type="Sprite" parent="." index="42"]
+
+position = Vector2( 104, 260 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="D6" type="Sprite" parent="." index="43"]
+
+position = Vector2( 156, 260 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="E6" type="Sprite" parent="." index="44"]
+
+position = Vector2( 208, 260 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="F6" type="Sprite" parent="." index="45"]
+
+position = Vector2( 260, 260 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="G6" type="Sprite" parent="." index="46"]
+
+position = Vector2( 312, 260 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="H6" type="Sprite" parent="." index="47"]
+
+position = Vector2( 364, 260 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="A7" type="Sprite" parent="." index="48"]
+
+position = Vector2( 0, 312 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="B7" type="Sprite" parent="." index="49"]
+
+position = Vector2( 52, 312 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="C7" type="Sprite" parent="." index="50"]
+
+position = Vector2( 104, 312 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="D7" type="Sprite" parent="." index="51"]
+
+position = Vector2( 156, 312 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="E7" type="Sprite" parent="." index="52"]
+
+position = Vector2( 208, 312 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="F7" type="Sprite" parent="." index="53"]
+
+position = Vector2( 260, 312 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="G7" type="Sprite" parent="." index="54"]
+
+position = Vector2( 312, 312 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="H7" type="Sprite" parent="." index="55"]
+
+position = Vector2( 364, 312 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="A8" type="Sprite" parent="." index="56"]
+
+position = Vector2( 0, 364 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="B8" type="Sprite" parent="." index="57"]
+
+position = Vector2( 52, 364 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="C8" type="Sprite" parent="." index="58"]
+
+position = Vector2( 104, 364 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="D8" type="Sprite" parent="." index="59"]
+
+position = Vector2( 156, 364 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="E8" type="Sprite" parent="." index="60"]
+
+position = Vector2( 208, 364 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="F8" type="Sprite" parent="." index="61"]
+
+position = Vector2( 260, 364 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="G8" type="Sprite" parent="." index="62"]
+
+position = Vector2( 312, 364 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="H8" type="Sprite" parent="." index="63"]
+
+position = Vector2( 364, 364 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="WQueen" type="Sprite" parent="." index="64"]
+
+position = Vector2( 364, 364 )
+texture = ExtResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="BQueen" type="Sprite" parent="." index="65"]
+
+texture = ExtResource( 4 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+
