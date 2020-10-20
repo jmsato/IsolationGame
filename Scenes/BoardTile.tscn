@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/BoardTile.gd" type="Script" id=1]
+[ext_resource path="res://images/icon.png" type="Texture" id=2]
+
+[node name="BoardTile" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
+
+[node name="icon" type="Sprite" parent="." index="0"]
+
+visible = false
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+
