@@ -4,6 +4,8 @@ extends Node2D
 signal remove_piece
 #When a piece is placed
 signal place_piece
+#Holds the node for when a spot is taken
+onready var TakenPiece = get_node("X")
 
 #Data structure for Piece node that tile is holding
 var piece = {
@@ -23,6 +25,7 @@ func set_tile_position(new_position):
 func remove_piece():
 	piece["exists"] = false
 	piece["piece"] = null #TODO change to taken piece
+	TakenPiece.setVisible(true)
 	emit_signal("remove_piece")
 
 func set_piece(piece):
