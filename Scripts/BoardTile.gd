@@ -5,7 +5,7 @@ signal remove_piece
 #When a piece is placed
 signal place_piece
 #Holds the node for when a spot is taken
-onready var TakenPiece = get_node("X")
+var TakenPiece
 
 #Data structure for Piece node that tile is holding
 var piece = {
@@ -18,17 +18,19 @@ func _ready():
 
 func get_tile_position():
 	return position
-	
+
 func set_tile_position(new_position):
 	position = new_position
+	TakenPiece = get_node("X")
 
 func remove_piece():
-	piece["exists"] = false
-	piece["piece"] = null #TODO change to taken piece
-	TakenPiece.setVisible(true)
+	piece["exists"] = true
+	piece["piece"] = TakenPiece
+	TakenPiece.visible=true
 	emit_signal("remove_piece")
 
-func set_piece(piece):
+func set_piece():
 	piece["exists"] = true
-	piece["piece"] = piece
+	piece["piece"] = TakenPiece
+	TakenPiece.visible = true
 	emit_signal("add_piece")
