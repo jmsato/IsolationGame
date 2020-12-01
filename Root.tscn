@@ -3,7 +3,7 @@
 [ext_resource path="res://images/chessboard_cropped.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Board.gd" type="Script" id=2]
 
-[node name="Root" type="Node2D" index="0"]
+[node name="Root" type="Node2D"]
 
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 

@@ -26,6 +26,8 @@ func _ready():
 	Agent = get_node("/root/Root/Board/QueenB")
 	state[0] = 1 #Add the player to the beginning of the state
 	state[63] = 2 #Add the agent to the end of the state
+	playerIndex = 0
+	agentIndex = 63
 
 func _physics_process(delta):
 	#Initialize
@@ -36,7 +38,7 @@ func _physics_process(delta):
 	if player_types[current_player] == player1type:
 		if Input.is_action_just_pressed("ui_move"):
 			print("Button pressed")
-			var availableActions = getActions(1)
+			var availableActions = getPlayerActions()
 			var eventTileX = int(get_viewport().get_mouse_position().x / dimension)
 			var eventTileY = int(get_viewport().get_mouse_position().y / dimension)
 			if(availableActions.find(int(eventTileY * BOARD_DIMENSIONS.y + eventTileX)) >= 0):

@@ -1,10 +1,20 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://images/main_background.jpg" type="Texture" id=2]
 
-[node name="Root" type="Node2D"]
+[node name="MainMenu" type="Control"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Pause", "Visibility" ]
 
@@ -137,6 +147,12 @@ group = null
 text = "Quit"
 flat = true
 align = 1
-_sections_unfolded = [ "Pause", "Rect", "custom_colors" ]
+_sections_unfolded = [ "Anchor", "Material", "Pause", "Visibility" ]
+
+[connection signal="pressed" from="Buttons/Start" to="." method="_on_Start_pressed"]
+
+[connection signal="pressed" from="Buttons/Instructions" to="." method="_on_Instructions_pressed"]
+
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_Quit_pressed"]
 
 
