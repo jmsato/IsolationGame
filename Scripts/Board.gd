@@ -51,7 +51,7 @@ func _physics_process(delta):
 func generate_tiles():
 	for y in range(BOARD_DIMENSIONS.y):
 		for x in range(BOARD_DIMENSIONS.x):
-			var new_tile = load("res://Scenes/BoardTile.tscn").instance()
+			var new_tile = load("res://Scenes/Board/BoardTile.tscn").instance()
 			add_child(new_tile)
 			new_tile.set_tile_position(Vector2(x, y) * dimension)
 			tiles.append(new_tile)
@@ -59,9 +59,9 @@ func generate_tiles():
 			
 
 func generate_players():
-	var white = load("res://Scenes/QueenW.tscn").instance()
+	var white = load("res://Scenes/Queens/QueenW.tscn").instance()
 	add_child(white)
-	var black = load("res://Scenes/QueenB.tscn").instance()
+	var black = load("res://Scenes/Queens/QueenB.tscn").instance()
 	black.move(Vector2(7,7) * dimension)
 	add_child(black)
 
