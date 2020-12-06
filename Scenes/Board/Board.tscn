@@ -1,17 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://images/chessboard_cropped.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Board.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/AI.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/IsolationState.gd" type="Script" id=4]
 
 [node name="Root" type="Node2D"]
 
-_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
-
-[node name="Board" type="Sprite" parent="." index="0"]
-
+[node name="Board" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 centered = false
 script = ExtResource( 2 )
-_sections_unfolded = [ "Animation", "Material", "Offset", "Pause", "Region", "Transform", "Visibility", "Z Index" ]
 
+[node name="AI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
+[node name="CurrentState" type="Node" parent="."]
+script = ExtResource( 4 )
