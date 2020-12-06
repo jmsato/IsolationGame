@@ -85,7 +85,7 @@ class State:
 				actions.append(i)
 			elif int(i / BOARD_DIMENSIONS.x) - i % int(BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x) - index % int(BOARD_DIMENSIONS.x) && diagonalNegFlag:
 				actions.append(i)
-			elif i == (index + (BOARD_DIMENSIONS.x - 1) * (int(i / BOARD_DIMENSIONS.x) - int(index / BOARD_DIMENSIONS.x))):
+			elif (i == (index + (BOARD_DIMENSIONS.x - 1) * (int(i / BOARD_DIMENSIONS.x) - int(index / BOARD_DIMENSIONS.x)))) && diagonalPosFlag:
 				actions.append(i)
 		columnFlag = true
 		rowFlag = true
@@ -109,7 +109,7 @@ class State:
 				actions.append(i)
 			elif int(i / BOARD_DIMENSIONS.x) - i % int(BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x) - index % int(BOARD_DIMENSIONS.x) && diagonalNegFlag:
 				actions.append(i)
-			elif i == (index + (BOARD_DIMENSIONS.x - 1) * (int(i / BOARD_DIMENSIONS.x) - int(index / BOARD_DIMENSIONS.x))):
+			elif (i == (index + (BOARD_DIMENSIONS.x - 1) * (int(i / BOARD_DIMENSIONS.x) - int(index / BOARD_DIMENSIONS.x)))) && diagonalPosFlag:
 				actions.append(i)
 		return actions
 	

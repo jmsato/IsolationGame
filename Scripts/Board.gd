@@ -6,6 +6,8 @@ const player1type = 'human'
 const player2type = 'ai'
 var isTerminal = false
 var tiles = []
+var currentPlayer: int
+var validPlayerMove
 
 var currentStateNode: IsolationState
 var currentState#: IsolationState.State
@@ -31,10 +33,10 @@ func _ready():
 	#state.resize(64) #Initializes the array of the board
 	generate_tiles() #Generates the tiles of the board
 	generate_players() #Generates the queen players
-	Player = get_node("/root/Root/Board/Board/QueenW")
-	Agent = get_node("/root/Root/Board/Board/QueenB")
-	currentStateNode = get_node("/root/Root/Board/CurrentState")
-	ai = get_node("/root/Root/Board/AI")
+	Player = get_node("/root/Root/Game/Board/QueenW")
+	Agent = get_node("/root/Root/Game/Board/QueenB")
+	currentStateNode = get_node("/root/Root/Game/CurrentState")
+	ai = get_node("/root/Root/Game/AI")
 	#aiNode = get_node("/root/Root/Board/Board/AI")
 	#aiStateNode = get_node("/root/Root/AI")
 #	state[0] = 1 #Add the player to the beginning of the state
@@ -44,26 +46,33 @@ func _ready():
 	currentState = currentStateNode.State.new()
 	currentState.init()
 	ai.init(currentState)
-	play_game()
+	currentPlayer = 0
+	validPlayerMove = false
+	#play_game()
 
 func _physics_process(_delta):
 	#Initialize
-#	var current_player = 0
-#	var player_types = [player1type, player2type]
-#	#Game loop
-#	#while(true):
-#	if player_types[current_player] == player1type:
-#		if Input.is_action_just_pressed("ui_move"):
-#			print("Button pressed")
-#			var availableActions = getPlayerActions()
-#			var eventTileX = int(get_viewport().get_mouse_position().x / dimension)
-#			var eventTileY = int(get_viewport().get_mouse_position().y / dimension)
-#			if(availableActions.find(int(eventTileY * BOARD_DIMENSIONS.y + eventTileX)) >= 0):
-#				print("player will move")
-#			current_player = (current_player + 1)
-#	else:
-#		#mcts() # currently moves to a random spot
-#		current_player = 0 #(current_player + 1) % 2
+	#var current_player = 0
+	var player_types = [player1type, player2type]
+	#Game loop
+	if player_types[currentPlayer] == player1type:
+		get_tree().get_root().set_disable_input(false) #player can move during their turn
+		if Input.is_action_just_pressed("ui_move"):
+			print("Button pressed")
+			var availableActions = currentState.getPlayerActions()
+			#var availableActions = getPlayerActions()
+			var eventTileX = int(get_viewport().get_mouse_position().x / dimension)
+			var eventTileY = int(get_viewport().get_mouse_position().y / dimension)
+			if(availableActions.find(int(eventTileY * BOARD_DIMENSIONS.y + eventTileX)) >= 0):
+				print("player will move")
+				validPlayerMove = true
+			currentPlayer = (currentPlayer + 1)
+			print(currentPlayer)
+	else:
+		#mcts() # currently moves to a random spot
+		get_tree().get_root().set_disable_input(true) #player cannot move while it is the ai's turn
+		print("ai turn")
+		currentPlayer = 0 #(current_player + 1) % 2
 	pass
 
 func generate_tiles():
@@ -107,21 +116,24 @@ func play_game():
 			move = 1
 			currentState.doMove("player", move)
 
-#func _input(event):
-#	var playerXTile = int(Player.get_position().x / dimension)
-#	var playerYTile = int(Player.get_position().y / dimension)
-#	var playerIndex = (playerYTile * BOARD_DIMENSIONS.y) + playerXTile
-#	var playerTile = tiles[playerIndex]
-#	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed and playerTile.piece["piece"] == null and playerTile.piece["exists"] == false:
-#		var eventXTile = int(event.position.x / dimension)
-#		var eventYTile = int(event.position.y / dimension)
+func _input(event):
+	var playerXTile = int(Player.get_position().x / dimension)
+	var playerYTile = int(Player.get_position().y / dimension)
+	var playerIndex = (playerYTile * BOARD_DIMENSIONS.y) + playerXTile
+	var playerTile = tiles[playerIndex]
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed and playerTile.piece["piece"] == null and playerTile.piece["exists"] == false and validPlayerMove:
+		print(validPlayerMove)
+		var eventXTile = int(event.position.x / dimension)
+		var eventYTile = int(event.position.y / dimension)
 #		state[playerIndex] = 2 #Mark previous tile as taken
 #		state[(eventYTile * BOARD_DIMENSIONS.y) + eventXTile] = 1 #Mark new tile as player
-#		var xCoord = eventXTile * dimension
-#		var yCoord = eventYTile * dimension
-#		#Mark the last tile as used
-#		playerTile.remove_piece()
-#		Player.move(Vector2(xCoord, yCoord))
+		var xCoord = eventXTile * dimension
+		var yCoord = eventYTile * dimension
+		#Mark the last tile as used
+		playerTile.remove_piece()
+		Player.move(Vector2(xCoord, yCoord))
+		validPlayerMove = false
+		print(validPlayerMove)
 
 #func mcts():
 #	var xCoord = randi() % BOARD_DIMENSIONS.x

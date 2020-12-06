@@ -18,5 +18,5 @@ margin_bottom = 40.0
 [node name="HowToPlay" parent="Menus" instance=ExtResource( 2 )]
 visible = false
 
-[node name="Board" parent="." instance=ExtResource( 3 )]
+[node name="Game" parent="." instance=ExtResource( 3 )]
 visible = false

@@ -78,10 +78,10 @@ func updateValue(result):
 	self.root.visits += 1
 	self.root.value += result
 
-func mcTreeSearch(rootState, itermax, verbose = false):
+func mcTreeSearch(rootState, itermax, _verbose = false):
 	var rootNode = newNode(null, null, rootState) #rootState.lastPlayerMove
 	var tempNode
-	for i in range(1, itermax):
+	for _i in range(1, itermax):
 		tempNode = rootNode
 		var tempState = rootState.clone()
 

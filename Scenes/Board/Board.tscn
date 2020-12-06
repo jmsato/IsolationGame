@@ -5,7 +5,7 @@
 [ext_resource path="res://Scripts/AI.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/IsolationState.gd" type="Script" id=4]
 
-[node name="Root" type="Node2D"]
+[node name="Game" type="Node2D"]
 
 [node name="Board" type="Sprite" parent="."]
 texture = ExtResource( 1 )
