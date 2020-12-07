@@ -132,3 +132,8 @@ class State:
 			score = 2 * numPlayerMoves - numAgentMoves
 		
 		return score
+	
+	func didPlayerWin():
+		if getPlayerActions().size() == 0:
+			return true
+		return false

@@ -35,6 +35,10 @@ func _physics_process(_delta):
 	#Game loop
 	if currentState.isUtility():
 		print("End game")
+		if currentState.didPlayerWin():
+			print("Player won")
+		else:
+			print("Player lost")
 		get_tree().change_scene("res://Scenes/Menus/MainMenu.tscn")
 	else:
 #		print("Current State: " + String(currentState.state))
@@ -61,8 +65,8 @@ func _physics_process(_delta):
 		else:
 			get_tree().get_root().set_disable_input(true) #player cannot move while it is the ai's turn
 			print("calculating ai move")
-			var move = ai.mcTreeSearch(currentState, 3, false)
 			var moves = currentState.getAgentActions()
+			var move = ai.mcTreeSearch(currentState, moves.size(), false)
 			print("AI actions: " + String(moves))
 			var agentTile = tiles[currentState.agentIndex]
 			var xCoord = int(move % int(BOARD_DIMENSIONS.x)) * dimension
