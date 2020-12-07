@@ -20,7 +20,7 @@ class State:
 		self.playerIndex = 0
 		self.agentIndex = 63
 		self.state.resize(64)
-		for i in range(1, 62):
+		for i in range(1, 63):
 			self.state[i] = 0
 		self.state[playerIndex] = 1
 		self.state[agentIndex] = 2
@@ -45,7 +45,6 @@ class State:
 	#player: which player is moving
 	#position: position in the array the player is moving to
 	func doMove(player, position):
-		#player = player.toUppercase()
 		match player:
 			"player":
 				lastPlayerMove = playerIndex
@@ -91,7 +90,7 @@ class State:
 		rowFlag = true
 		diagonalNegFlag = true
 		diagonalPosFlag = true
-		for i in range(1, index - 1):
+		for i in range(index-1, 0, -1):
 			if state[i] != 0:
 				if i % int(BOARD_DIMENSIONS.x) == index % int(BOARD_DIMENSIONS.x):
 					columnFlag = false

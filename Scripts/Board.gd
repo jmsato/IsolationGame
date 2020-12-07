@@ -33,10 +33,14 @@ func _ready():
 	#state.resize(64) #Initializes the array of the board
 	generate_tiles() #Generates the tiles of the board
 	generate_players() #Generates the queen players
-	Player = get_node("/root/Root/Game/Board/QueenW")
-	Agent = get_node("/root/Root/Game/Board/QueenB")
-	currentStateNode = get_node("/root/Root/Game/CurrentState")
-	ai = get_node("/root/Root/Game/AI")
+	Player = get_node("/root/Game/Board/QueenW")
+	Agent = get_node("/root/Game/Board/QueenB")
+	currentStateNode = get_node("/root/Game/CurrentState")
+	ai = get_node("/root/Game/AI")
+#	Player = get_node("/root/Root/Game/Board/QueenW")
+#	Agent = get_node("/root/Root/Game/Board/QueenB")
+#	currentStateNode = get_node("/root/Root/Game/CurrentState")
+#	ai = get_node("/root/Root/Game/AI")
 	#aiNode = get_node("/root/Root/Board/Board/AI")
 	#aiStateNode = get_node("/root/Root/AI")
 #	state[0] = 1 #Add the player to the beginning of the state
@@ -55,25 +59,48 @@ func _physics_process(_delta):
 	#var current_player = 0
 	var player_types = [player1type, player2type]
 	#Game loop
-	if player_types[currentPlayer] == player1type:
-		get_tree().get_root().set_disable_input(false) #player can move during their turn
-		if Input.is_action_just_pressed("ui_move"):
-			print("Button pressed")
-			var availableActions = currentState.getPlayerActions()
-			#var availableActions = getPlayerActions()
-			var eventTileX = int(get_viewport().get_mouse_position().x / dimension)
-			var eventTileY = int(get_viewport().get_mouse_position().y / dimension)
-			if(availableActions.find(int(eventTileY * BOARD_DIMENSIONS.y + eventTileX)) >= 0):
-				print("player will move")
-				validPlayerMove = true
-			currentPlayer = (currentPlayer + 1)
-			print(currentPlayer)
+	if currentState.isUtility():
+		print("End game")
+		get_tree().change_scene("res://Scenes/Menus/MainMenu.tscn")
 	else:
-		#mcts() # currently moves to a random spot
-		get_tree().get_root().set_disable_input(true) #player cannot move while it is the ai's turn
-		print("ai turn")
-		currentPlayer = 0 #(current_player + 1) % 2
-	pass
+#		print("Current State: " + String(currentState.state))
+		if player_types[currentPlayer] == player1type:
+			get_tree().get_root().set_disable_input(false) #player can move during their turn
+			if Input.is_action_just_pressed("ui_move"):
+				print("Button pressed")
+				var availableActions = currentState.getPlayerActions()
+				print("Player actions: " + String(availableActions))
+				#var availableActions = getPlayerActions()
+				var eventTileX = int(get_viewport().get_mouse_position().x / dimension)
+				var eventTileY = int(get_viewport().get_mouse_position().y / dimension)
+				var playerTileIndex = int(eventTileY * BOARD_DIMENSIONS.y + eventTileX)
+				var playerTile = tiles[currentState.playerIndex]
+				var xCoord = eventTileX * dimension
+				var yCoord = eventTileY * dimension
+				if(availableActions.find(playerTileIndex) >= 0):
+					print("player will move")
+					validPlayerMove = true
+					currentState.doMove("player", playerTileIndex)
+					playerTile.remove_piece()
+					Player.move(Vector2(xCoord, yCoord))
+				currentPlayer = (currentPlayer + 1)
+				print(currentPlayer)
+		else:
+			get_tree().get_root().set_disable_input(true) #player cannot move while it is the ai's turn
+			print("calculating ai move")
+			var move = ai.mcTreeSearch(currentState, 1, false)
+			var moves = currentState.getAgentActions()
+			print("AI actions: " + String(moves))
+#			var move = moves[randi() % moves.size()]
+			var agentTile = tiles[currentState.agentIndex]
+			var xCoord = int(move % int(BOARD_DIMENSIONS.x)) * dimension
+			var yCoord = int(move / BOARD_DIMENSIONS.y) * dimension
+			currentState.doMove("agent", move)
+			print("ai turn: " + String(move) + " xCoord: " + String(xCoord) + " yCoord: " + String(yCoord))
+			agentTile.remove_piece()
+			Agent.move(Vector2(xCoord, yCoord))
+			currentPlayer = 0 #(current_player + 1) % 2
+#	pass
 
 func generate_tiles():
 	for y in range(BOARD_DIMENSIONS.y):
@@ -82,8 +109,6 @@ func generate_tiles():
 			add_child(new_tile)
 			new_tile.set_tile_position(Vector2(x, y) * dimension)
 			tiles.append(new_tile)
-			#state[BOARD_DIMENSIONS.x * y + x] = 0
-			
 
 func generate_players():
 	var white = load("res://Scenes/Queens/QueenW.tscn").instance()
@@ -91,130 +116,3 @@ func generate_players():
 	var black = load("res://Scenes/Queens/QueenB.tscn").instance()
 	black.move(Vector2(7,7) * dimension)
 	add_child(black)
-#	var ai = load("res://Scenes/AI.tscn").instance()
-#	add_child(ai)
-
-func play_game():
-	#var gameState = aiNode._init()
-	#var gameStateNode = aiStateNode.newNode(null, null, gameState)
-	#var gameStateNode = aiStateNode._ready(null, null, gameState)
-	var move
-#	while !gameState.isUtility():
-#		if gameState.playerJustMoved == 2:
-#			move = gameStateNode.mcTreeSearch(gameState, 100, false)
-#			gameState.doMove("agent", move)
-#			print(move)
-#		else:
-#			move = 1
-#			gameState.doMove("player", move)
-	while !currentState.isUtility():
-		if currentState.playerJustMoved == "player":
-			move = ai.mcTreeSearch(currentState, 100, false)
-			currentState.doMove("agent", move)
-			print(move)
-		else:
-			move = 1
-			currentState.doMove("player", move)
-
-func _input(event):
-	var playerXTile = int(Player.get_position().x / dimension)
-	var playerYTile = int(Player.get_position().y / dimension)
-	var playerIndex = (playerYTile * BOARD_DIMENSIONS.y) + playerXTile
-	var playerTile = tiles[playerIndex]
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed and playerTile.piece["piece"] == null and playerTile.piece["exists"] == false and validPlayerMove:
-		print(validPlayerMove)
-		var eventXTile = int(event.position.x / dimension)
-		var eventYTile = int(event.position.y / dimension)
-#		state[playerIndex] = 2 #Mark previous tile as taken
-#		state[(eventYTile * BOARD_DIMENSIONS.y) + eventXTile] = 1 #Mark new tile as player
-		var xCoord = eventXTile * dimension
-		var yCoord = eventYTile * dimension
-		#Mark the last tile as used
-		playerTile.remove_piece()
-		Player.move(Vector2(xCoord, yCoord))
-		validPlayerMove = false
-		print(validPlayerMove)
-
-#func mcts():
-#	var xCoord = randi() % BOARD_DIMENSIONS.x
-#	var yCoord = randi() % BOARD_DIMENSIONS.x
-#	Agent.move(Vector2(xCoord, yCoord) * dimension)
-
-#func isValidMove(pos):
-#	return state[pos] == 0 or state[pos] == null
-#
-#func getValue():
-#	var numPlayerMoves = getPlayerActions().size()
-#	var numAgentMoves = getAgentActions().size()
-#
-#	var score = numPlayerMoves - numAgentMoves
-#
-#	if(score > 5):
-#		score = numPlayerMoves - 2 * numAgentMoves
-#	elif(score < -5):
-#		score = 2 * numPlayerMoves - numAgentMoves
-#
-#	return score
-#
-#func getActions(index):
-#	var actions = []
-#	var columnFlag = true
-#	var rowFlag = true
-#	var diagonalNegFlag = true
-#	var diagonalPosFlag = true
-#	for i in range(index+1, BOARD_DIMENSIONS.x*BOARD_DIMENSIONS.y):
-#		if state[i] != 0:
-#			if i % int(BOARD_DIMENSIONS.x) == index % int(BOARD_DIMENSIONS.x):
-#				columnFlag = false
-#			elif int(i / BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x):
-#				rowFlag = false
-#			elif int(i / BOARD_DIMENSIONS.x) - i % int(BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x) - index % int(BOARD_DIMENSIONS.x):
-#				diagonalNegFlag = false
-#			elif i == (index + (BOARD_DIMENSIONS.x - 1) * (int(i / BOARD_DIMENSIONS.x) - int(index / BOARD_DIMENSIONS.x))):
-#				diagonalPosFlag = false
-#			else:
-#				continue
-#		if i % int(BOARD_DIMENSIONS.x) == index % int(BOARD_DIMENSIONS.x) && columnFlag:
-#			actions.append(i)
-#		elif int(i / BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x) && rowFlag:
-#			actions.append(i)
-#		elif int(i / BOARD_DIMENSIONS.x) - i % int(BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x) - index % int(BOARD_DIMENSIONS.x) && diagonalNegFlag:
-#			actions.append(i)
-#		elif i == (index + (BOARD_DIMENSIONS.x - 1) * (int(i / BOARD_DIMENSIONS.x) - int(index / BOARD_DIMENSIONS.x))):
-#			actions.append(i)
-#	columnFlag = true
-#	rowFlag = true
-#	diagonalNegFlag = true
-#	diagonalPosFlag = true
-#	for i in range(1, index - 1):
-#		if state[i] != 0:
-#			if i % int(BOARD_DIMENSIONS.x) == index % int(BOARD_DIMENSIONS.x):
-#				columnFlag = false
-#			elif int(i / BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x):
-#				rowFlag = false
-#			elif int(i / BOARD_DIMENSIONS.x) - i % int(BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x) - index % int(BOARD_DIMENSIONS.x):
-#				diagonalNegFlag = false
-#			elif i == (index + (BOARD_DIMENSIONS.x - 1) * (int(i / BOARD_DIMENSIONS.x) - int(index / BOARD_DIMENSIONS.x))):
-#				diagonalPosFlag = false
-#			else:
-#				continue
-#		if i % int(BOARD_DIMENSIONS.x) == index % int(BOARD_DIMENSIONS.x) && columnFlag:
-#			actions.append(i)
-#		elif int(i / BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x) && rowFlag:
-#			actions.append(i)
-#		elif int(i / BOARD_DIMENSIONS.x) - i % int(BOARD_DIMENSIONS.x) == int(index / BOARD_DIMENSIONS.x) - index % int(BOARD_DIMENSIONS.x) && diagonalNegFlag:
-#			actions.append(i)
-#		elif i == (index + (BOARD_DIMENSIONS.x - 1) * (int(i / BOARD_DIMENSIONS.x) - int(index / BOARD_DIMENSIONS.x))):
-#			actions.append(i)
-#	return actions
-#
-#func getPlayerActions():
-#	return getActions(playerIndex)
-#
-#func getAgentActions():
-#	return getActions(agentIndex)
-#
-#func isUtility():
-#	if getPlayerActions().size() == 0 || getAgentActions().size() == 0:
-#		return true
-#	return false
