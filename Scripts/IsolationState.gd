@@ -1,9 +1,6 @@
 extends Node
 
 class_name IsolationState
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 
 class State:
 	#Board state
@@ -135,8 +132,3 @@ class State:
 			score = 2 * numPlayerMoves - numAgentMoves
 		
 		return score
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

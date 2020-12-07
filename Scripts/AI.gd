@@ -1,9 +1,6 @@
 extends Control
 
 class_name AI
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 
 class MCTS_Node:
 	var gameState: IsolationState.State
@@ -34,17 +31,6 @@ class MCTS_Node:
 					sortArray[item2 - 1] = sortArray[item2]
 					sortArray[item2] = tempStore
 		return sortArray
-#	func clone():
-#		var st = load("res://Scripts/AI.gd").MCTS_Node.new() #init()
-#		st.gameState = self.gameState
-#		st.move = self.move
-#		st.parentNode = self.parentNode
-#		st.childNodes = self.childNodes.duplicate()
-#		st.value = self.value
-#		st.visits = self.visits
-#		st.untriedMoves = self.untriedMoves
-#		st.playerJustMoved = self.playerJustMoved
-#		return st
 	
 var isoState: IsolationState.State
 var root: MCTS_Node
@@ -52,25 +38,7 @@ const epsilon = .000001
 
 func init(state):
 	isoState = state
-	#isoState = get_node("/root/Root/AI").currentState
 	root = MCTS_Node.new(isoState, null)
-
-func clone():
-#	var st = AI.MCTS_Node.new(self.isoState, null)
-#	st.isoState = self.isoState
-#	st.root = self.root
-#	return st
-#	var st = MCTS_Node.new(isoState, null) #init()
-#	st.gameState = self.root.gameState
-#	st.move = self.root.move
-#	st.parentNode = self.root.parentNode
-#	st.childNodes = self.root.childNodes.duplicate()
-#	st.value = self.root.value
-#	st.visits = self.root.visits
-#	st.untriedMoves = self.root.untriedMoves
-#	st.playerJustMoved = self.root.playerJustMoved
-#	return st
-	pass
 
 func sortStates(sortArray):
 	var arraySize = sortArray.size() - 1
@@ -107,11 +75,6 @@ static func uct(a, b):
 		return true
 	return false
 
-#static func visits(a, b):
-#	if a.visits < b.visits:
-#		return true
-#	return false
-
 #m: Move
 #s: State (IsolationState)
 func addChild(m, s):
@@ -126,16 +89,16 @@ func updateValue(result):
 	self.root.value += result
 
 func mcTreeSearch(rootState, itermax, _verbose = false):
-	var rootNode = newNode(null, null, rootState) #rootState.lastPlayerMove
+	var rootNode = newNode(null, null, rootState)
 	var tempNode
 	for _i in range(0, itermax):
 		print("In for loop")
-		tempNode = rootNode #rootNode.clone()
+		tempNode = rootNode 
 		var tempState = rootState.clone()
 
 		#Select
 		print("In select step")
-		while tempNode.root.untriedMoves == [] and tempNode.root.childreNodes != []:
+		while tempNode.root.untriedMoves == [] and tempNode.root.childrenNodes != []:
 			tempNode = tempNode.selectChild()
 			if tempNode.root.playerJustMoved == "player":
 				tempState.doMove("ai", tempNode.move)
@@ -154,9 +117,6 @@ func mcTreeSearch(rootState, itermax, _verbose = false):
 
 		#Rollout
 		print("In rollout step")
-#		while !tempState.isUtility():
-#			var actions = []
-#			print("going thru rollout")
 		match tempState.playerJustMoved:
 			"ai":
 				var actions = tempState.getPlayerActions()
@@ -164,7 +124,6 @@ func mcTreeSearch(rootState, itermax, _verbose = false):
 			"player":
 				var actions = tempState.getAgentActions()
 				tempState.doMove("ai", actions[randi() % actions.size()])
-			#tempState.doMove(actions[randi() % actions.size()])
 
 		#Backpropogate
 		print("In backpropogate step")
@@ -173,10 +132,7 @@ func mcTreeSearch(rootState, itermax, _verbose = false):
 			tempNode = tempNode.parentNode
 	print("returning something")
 	tempNode.childNodes = tempNode.sortStates(tempNode.childNodes)
-#	print(tempNode.sortStates(tempNode.childNodes))
-#	print(tempNode.childNodes.sort_custom(AI.MCTS_Node, "visits"))
-	return tempNode.childNodes[0].root.move#.sort()[tempNode.childNodes.size() - 1].move
-	#return tempNode.childNodes.sort_custom(StateNode, "visits")[-1].move
+	return tempNode.childNodes[0].root.move
 	
 func _ready():
 	# Called when the node is added to the scene for the first time.
