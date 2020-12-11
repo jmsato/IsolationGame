@@ -13,7 +13,7 @@ class State:
 	const BOARD_DIMENSIONS = Vector2(8,8)
 
 	func init():
-		self.playerJustMoved = 'ai' #player always goes first
+		self.playerJustMoved = 'agent' #player always goes first
 		self.playerIndex = 0
 		self.agentIndex = 63
 		self.state.resize(64)
@@ -54,7 +54,7 @@ class State:
 				state[agentIndex] = 3 #Mark space as used
 				state[position] = 2
 				agentIndex = position
-				playerJustMoved = 'ai'
+				playerJustMoved = 'agent'
 		return self
 	
 	func getActions(index):
@@ -134,6 +134,6 @@ class State:
 		return score
 	
 	func didPlayerWin():
-		if getPlayerActions().size() == 0:
-			return true
-		return false
+		if playerJustMoved.match("agent"):
+			return false
+		return true
