@@ -35,6 +35,7 @@ class MCTS_Node:
 var isoState: IsolationState.State
 var root: MCTS_Node
 const epsilon = .000001
+var depth: int = 1
 
 func init(state):
 	isoState = state
@@ -135,6 +136,4 @@ func mcTreeSearch(rootState, itermax, _verbose = false):
 	return tempNode.childNodes[0].root.move
 	
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
 	pass

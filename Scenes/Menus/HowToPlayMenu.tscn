@@ -5,6 +5,9 @@
 
 [node name="HowToPlay" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -16,8 +19,11 @@ margin_right = 228.0
 margin_bottom = 52.0
 rect_scale = Vector2( 1.5, 1.5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "How to Play:"
+text = "How to Play"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Description" type="RichTextLabel" parent="."]
 margin_left = 26.0
@@ -44,4 +50,7 @@ custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 text = "Got it!"
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Done" to="." method="_on_Done_pressed"]
