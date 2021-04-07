@@ -32,14 +32,26 @@ class MCTS_Node:
 					sortArray[item2] = tempStore
 		return sortArray
 	
+	static func uct(a, b):
+		var uctA = a.value / (a.visits + epsilon) + sqrt(log(a.visits+1) / (a.visits + epsilon)) + rand_range(0, 1) * epsilon
+		var uctB = b.value / (b.visits + epsilon) + sqrt(log(b.visits+1) / (b.visits + epsilon)) + rand_range(0, 1) * epsilon
+		if uctA < uctB:
+			return true
+		return false
+	
 var isoState: IsolationState.State
 var root: MCTS_Node
 const epsilon = .000001
 var depth: int = 1
+var difficultyRatio: int = 0
 
 func init(state):
 	isoState = state
 	root = MCTS_Node.new(isoState, null)
+
+func setDifficulty(ratio):
+	difficultyRatio = ratio
+	print(difficultyRatio)
 
 func sortStates(sortArray):
 	var arraySize = sortArray.size() - 1
@@ -65,8 +77,8 @@ func newNode(move = null, parent = null, state = null):
 	return self # may comment out later
 
 func selectChild():
-	var s = isoState.childNodes.sort()
-	#var s = childNodes.sort_custom(class(StateNode), "uct")
+	#var s = isoState.childNodes.sort()
+	var s = self.root.childNodes.sort_custom(MCTS_Node, "uct")
 	return s
 
 static func uct(a, b):
@@ -92,14 +104,14 @@ func updateValue(result):
 func mcTreeSearch(rootState, itermax, _verbose = false):
 	var rootNode = newNode(null, null, rootState)
 	var tempNode
-	for _i in range(0, itermax):
+	for _i in range(0, itermax): #* difficultyRatio):
 		print("In for loop")
 		tempNode = rootNode 
 		var tempState = rootState.clone()
 
 		#Select
 		print("In select step")
-		while tempNode.root.untriedMoves == [] and tempNode.root.childrenNodes != []:
+		while tempNode.root.untriedMoves == [] and tempNode.root.childNodes != []:
 			tempNode = tempNode.selectChild()
 			if tempNode.root.playerJustMoved == "player":
 				tempState.doMove("ai", tempNode.move)
@@ -118,13 +130,14 @@ func mcTreeSearch(rootState, itermax, _verbose = false):
 
 		#Rollout
 		print("In rollout step")
-		match tempState.playerJustMoved:
-			"ai":
-				var actions = tempState.getPlayerActions()
-				tempState.doMove("player", actions[randi() % actions.size()])
-			"player":
-				var actions = tempState.getAgentActions()
-				tempState.doMove("ai", actions[randi() % actions.size()])
+		for _j in range(0, difficultyRatio):
+			match tempState.playerJustMoved:
+				"ai":
+					var actions = tempState.getPlayerActions()
+					tempState.doMove("player", actions[randi() % actions.size()])
+				"player":
+					var actions = tempState.getAgentActions()
+					tempState.doMove("ai", actions[randi() % actions.size()])
 
 		#Backpropogate
 		print("In backpropogate step")

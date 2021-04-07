@@ -5,6 +5,9 @@
 
 [node name="MainMenu" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 2 )

@@ -19,10 +19,10 @@ var Agent
 func _ready():
 	generateTiles() #Generates the tiles of the board
 	generatePlayers() #Generates the queen players
-	Player = get_node("/root/Game/Board/QueenW")
-	Agent = get_node("/root/Game/Board/QueenB")
-	currentStateNode = get_node("/root/Game/CurrentState")
-	ai = get_node("/root/Game/AI")
+	Player = get_node("/root/Game/Board/QueenW")#Player = get_node("/root/Difficulty/Game/Board/QueenW")#Player = get_node("/root/Root/Menus/Difficulty/Game/Board/QueenW")
+	Agent = get_node("/root/Game/Board/QueenB")#Agent = get_node("/root/Difficulty/Game/Board/QueenB")#Agent = get_node("/root/Root/Menus/Difficulty/Game/Board/QueenB")
+	currentStateNode = get_node("/root/Game/CurrentState")#currentStateNode = get_node("/root/Difficulty/Game/CurrentState")#currentStateNode = get_node("/root/Root/Menus/Difficulty/Game/CurrentState")
+	ai = get_node("/root/Game/AI")#ai = get_node("/root/Difficulty/Game/AI")#ai = get_node("/root/Root/Menus/Difficulty/Game/AI")
 	currentState = currentStateNode.State.new()
 	currentState.init()
 	ai.init(currentState)

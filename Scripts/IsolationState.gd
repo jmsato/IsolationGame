@@ -134,6 +134,6 @@ class State:
 		return score
 	
 	func didPlayerWin():
-		if playerJustMoved.match("agent"):
-			return false
-		return true
+		if playerJustMoved.match("agent") && getAgentActions().size() == 0:
+			return true
+		return false

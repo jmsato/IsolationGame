@@ -38,6 +38,9 @@ text = "The goal of the game is to isolate your opponent such that they have no 
 Each player is given a queen piece. The queen is allowed to move as it would in chess, so it can move any direction horizontally, vertically, and diagonally. However, no player can move over or \"jump\" over taken squares. This means all moves must have a clean line of sight in order for the player to move there.
 
 Starting with the player, the player and computer will take turns interchangeably with only one move at a time. The game ends when either the player or computer is unable to make a move."
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Done" type="Button" parent="."]
 margin_left = 182.0
